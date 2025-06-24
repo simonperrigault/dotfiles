@@ -1,0 +1,4 @@
+[Libinput][1267][12930][ELAN0307:00 04F3:3282 Touchpad]
+Enabled=true
+NaturalScroll=true
+PointerAcceleration=0.200

@@ -1,0 +1,22 @@
+[ContentDisplay]
+UseShortRelativeDates=false
+
+[General]
+ConfirmClosingMultipleTabs=false
+EditableUrl=true
+ShowFullPath=true
+ShowFullPathInTitlebar=true
+ShowStatusBar=FullWidth
+SortingChoice=CaseInsensitiveSorting
+Version=202
+ViewPropsTimestamp=2025,6,22,17,13,4.636
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[MainWindow]
+MenuBar=Disabled
+
+[PreviewSettings]
+Plugins=ffmpegthumbnailer,appimagethumbnail,evince,audiothumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,ffmpeg-audio-thumbnailer,directorythumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,totem,svgthumbnail,gnome-font-viewer,gdk-pixbuf-thumbnailer,gsf-office
