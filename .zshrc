@@ -83,7 +83,6 @@ plugins=(git
         zoxide
         zsh-autosuggestions
         zsh-syntax-highlighting
-        you-should-use
         colored-man-pages
 )
 source $ZSH/oh-my-zsh.sh
@@ -96,6 +95,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
+export VISUAL='vim'
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
@@ -119,5 +119,6 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+alias limbitbake='BB_NUMBER_THREADS=5 PARALLEL_MAKE="-j 3" bitbake'
 eval "$(zoxide init zsh)"
 
