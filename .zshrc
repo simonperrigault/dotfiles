@@ -120,12 +120,12 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-    exec tmux
-fi
+# if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+#     exec tmux
+# fi
 
 alias limbitbake='BB_NUMBER_THREADS=5 PARALLEL_MAKE="-j 3" bitbake'
 alias vi=nvim
 
 eval "$(zoxide init zsh)"
-
+source <(fzf --zsh)
