@@ -11,7 +11,7 @@ return {
                 enable = true,
             },
             -- activation de l'indentation améliorée
-            indent = { enable = true },
+            -- indent = { enable = true },
 
             -- langages installés et configurés
             ensure_installed = {
