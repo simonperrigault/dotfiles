@@ -128,4 +128,10 @@ alias limbitbake='BB_NUMBER_THREADS=5 PARALLEL_MAKE="-j 3" bitbake'
 alias vi=nvim
 
 eval "$(zoxide init zsh)"
-source <(fzf --zsh)
+VERSION=$(echo $(fzf --version) | awk '{print $1}' | awk -F'.' '{print $2}')
+if [ $VERSION -ge 48 ] ; then
+    source <(fzf --zsh)
+else
+    source /usr/share/doc/fzf/examples/key-bindings.zsh
+    source /usr/share/doc/fzf/examples/completion.zsh
+fi
