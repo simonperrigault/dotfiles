@@ -9,7 +9,7 @@
     "[python]": {
         "editor.formatOnType": true
     },
-    "workbench.colorTheme": "Visual Studio 2017 Dark - C++",
+    "workbench.colorTheme": "Default Dark+",
     "explorer.confirmDelete": false,
     "python.defaultInterpreterPath": "/bin/python3",
     "github.copilot.advanced": {},
