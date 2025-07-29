@@ -5,8 +5,8 @@ local opt = vim.opt -- raccourci pour un peu plus de concision
 opt.number = true -- affiche le numéro absolu de la ligne active lorsque que relativenumber est activé
 
 -- tabs & indentation
-opt.tabstop = 4 -- 2 espaces pour les tabulations
-opt.shiftwidth = 4 -- 2 espaces pour la taille des indentations
+opt.tabstop = 4 -- 4 espaces pour les tabulations
+opt.shiftwidth = 4 -- 4 espaces pour la taille des indentations
 opt.expandtab = true -- change les tabulations en espaces (don't feed the troll please ;) )
 opt.autoindent = true -- on garde l'indentation actuelle à la prochaine ligne
 

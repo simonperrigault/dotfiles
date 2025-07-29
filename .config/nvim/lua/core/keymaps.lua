@@ -5,7 +5,7 @@ vim.g.mapleader = " "
 local keymap = vim.keymap.set
 
 -- on utilise ;; pour sortir du monde insertion
-keymap("i", ";;", "<ESC>", { desc = "Sortir du mode insertion avec ;;" })
+keymap("i", "jj", "<ESC>", { desc = "Sortir du mode insertion avec jj" })
 
 -- Changement de fenêtre avec Ctrl + déplacement uniquement au lieu de Ctrl-w + déplacement
 -- keymap("n", "<C-h>", "<C-w>h", { desc = "Déplace le curseur dans la fenêtre de gauche" })
