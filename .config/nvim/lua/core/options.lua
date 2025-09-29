@@ -7,7 +7,7 @@ opt.number = true -- affiche le numéro absolu de la ligne active lorsque que re
 -- tabs & indentation
 opt.tabstop = 4 -- 4 espaces pour les tabulations
 opt.shiftwidth = 4 -- 4 espaces pour la taille des indentations
--- opt.expandtab = true -- change les tabulations en espaces (don't feed the troll please ;) )
+opt.expandtab = true -- change les tabulations en espaces (don't feed the troll please ;) )
 opt.autoindent = true -- on garde l'indentation actuelle à la prochaine ligne
 
 -- recherche
