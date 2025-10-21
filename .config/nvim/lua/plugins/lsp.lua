@@ -7,15 +7,29 @@ return {
              "williamboman/mason-lspconfig.nvim",
              "hrsh7th/nvim-cmp",
              "hrsh7th/cmp-nvim-lsp", 
-             "L3MON4D3/LuaSnip"
+             'saghen/blink.cmp'
         },
         config = function()
             require("mason").setup({})
             require('mason-lspconfig').setup({
                 handlers = {
                     function(server_name)
-                        require('lspconfig')[server_name].setup({})
+                        require('lspconfig')[server_name].setup({
+                            capabilities = capabilities
+                        })
                     end,
+                    ["basedpyright"] = function()
+                        require("lspconfig").basedpyright.setup({
+                            capabilities = capabilities, 
+                            settings = {
+                                basedpyright = {
+                                    analysis = {
+                                        typeCheckingMode = 'basic'
+                                    },
+                                },
+                            },
+                        })
+                    end
                 },
                 automatic_enable = true,
             })
