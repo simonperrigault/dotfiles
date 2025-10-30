@@ -124,7 +124,6 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
     exec tmux
 fi
 
-alias limbitbake='BB_NUMBER_THREADS=5 PARALLEL_MAKE="-j 3" bitbake'
 alias vi=nvim
 
 eval "$(zoxide init zsh)"
