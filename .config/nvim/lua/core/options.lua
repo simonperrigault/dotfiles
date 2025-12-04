@@ -1,7 +1,7 @@
 local opt = vim.opt -- raccourci pour un peu plus de concision
 
 -- numéros de ligne
--- opt.relativenumber = true -- affichage des numéros de ligne relatives à la position actuelle du curseur
+opt.relativenumber = true -- affichage des numéros de ligne relatives à la position actuelle du curseur
 opt.number = true -- affiche le numéro absolu de la ligne active lorsque que relativenumber est activé
 
 -- tabs & indentation
@@ -51,6 +51,9 @@ vim.diagnostic.config(
         virtual_text = {
             spacing = 4,
             prefix = "●",
+            severity = {
+                min = vim.diagnostic.severity.ERROR,
+            },
         },
         update_in_insert = false,
         severity_sort = true,
@@ -62,6 +65,9 @@ vim.diagnostic.config(
                 [vim.diagnostic.severity.HINT] = " ",
                 [vim.diagnostic.severity.INFO] = " ",
             },
+        },
+        severity = {
+            min = vim.diagnostic.severity.ERROR,
         },
     }
 )

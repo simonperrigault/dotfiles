@@ -1,16 +1,23 @@
 return {
   "folke/trouble.nvim",
-  opts = {}, -- for default options, refer to the configuration section for custom setup.
+  opts = {
+    modes = {
+      cascade = {
+        mode = "diagnostics", -- inherit from diagnostics mode
+        severity = vim.diagnostic.severity.ERROR, -- Set the minimum severity to ERROR
+      }
+    }
+  },
   cmd = "Trouble",
   keys = {
     {
       "<leader>xx",
-      "<cmd>Trouble diagnostics toggle<cr>",
+      "<cmd>Trouble cascade toggle<cr>",
       desc = "Diagnostics (Trouble)",
     },
     {
       "<leader>xX",
-      "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+      "<cmd>Trouble cascade toggle filter.buf=0<cr>",
       desc = "Buffer Diagnostics (Trouble)",
     },
     {
