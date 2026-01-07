@@ -5,7 +5,7 @@ return {
   opts = {},
   config = function()
     -- chargement du thème
-    vim.cmd("colorscheme catppuccin-mocha")
+    vim.cmd("colorscheme catppuccin-macchiato")
   end,
 }
 
