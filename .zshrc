@@ -126,6 +126,7 @@ fi
 
 alias vi=nvim
 alias sshp='ssh perrigault'
+alias lg='lazygit'
 
 eval "$(zoxide init zsh)"
 VERSION=$(echo $(fzf --version) | awk '{print $1}' | awk -F'.' '{print $2}')
