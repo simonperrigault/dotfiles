@@ -1,308 +1,185 @@
-"$schema" = 'https://starship.rs/config-schema.json'
+# Starship configuration replicating p10k-lean style
 
-[aws]
-symbol = " "
+# Empty line before each prompt (matches POWERLEVEL9K_PROMPT_ADD_NEWLINE=true)
+add_newline = true
 
-[azure]
-symbol = " "
+# Left-side layout
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$line_break\
+$character"""
 
-[battery]
-full_symbol = "󰁹 "
-charging_symbol = "󰂄 "
-discharging_symbol = "󰂃 "
-unknown_symbol = "󰂑 "
-empty_symbol = "󰂎 "
+# Right-side layout (matches p10k right prompt elements)
+right_format = """
+$status\
+$cmd_duration\
+$jobs\
+$python\
+$conda\
+$nodejs\
+$rust\
+$golang\
+$java\
+$lua\
+$php\
+$ruby\
+$terraform\
+$time"""
 
-[buf]
-symbol = " "
+# -----------------------------------------------------------------------------
+# LINE 2: Prompt Character (prompt_char)
+# -----------------------------------------------------------------------------
+[character]
+success_symbol = "[❯](bold #5fd700)"  # ANSI 76 green
+error_symbol = "[❯](bold #ff0000)"    # ANSI 196 red
 
-[bun]
-symbol = " "
-
-[c]
-symbol = " "
-
-[cpp]
-symbol = " "
-
-[cmake]
-symbol = " "
-
-[cobol]
-symbol = " "
-
-[conda]
-symbol = " "
-
-[container]
-symbol = " "
-
-[crystal]
-symbol = " "
-
-[dart]
-symbol = " "
-
-[deno]
-symbol = " "
-
-[direnv]
-symbol = " "
-
-[directory]
-read_only = " 󰌾"
-
-[docker_context]
-symbol = " "
-
-[dotnet]
-symbol = " "
-
-[elixir]
-symbol = " "
-
-[elm]
-symbol = " "
-
-[erlang]
-symbol = " "
-
-[fennel]
-symbol = " "
-
-[fortran]
-symbol = " "
-
-[fossil_branch]
-symbol = " "
-
-[gcloud]
-symbol = "󱇶 "
-
-[gleam]
-symbol = " "
-
-[git_branch]
-symbol = " "
-
-[git_commit]
-tag_symbol = '  '
-
-[golang]
-symbol = " "
-
-[gradle]
-symbol = " "
-
-[guix_shell]
-symbol = " "
-
-[haskell]
-symbol = " "
-
-[haxe]
-symbol = " "
-
-[helm]
-symbol = " "
-
-[hg_branch]
-symbol = " "
+# -----------------------------------------------------------------------------
+# LINE 1: Context (User & Host)
+# Hidden by default; only shows when logged in via SSH or as root
+# -----------------------------------------------------------------------------
+[username]
+show_always = false
+format = "[$user]($style)"
+style_user = "#d7af87"               # ANSI 180
+style_root = "bold #d7af00"          # ANSI 178
 
 [hostname]
-ssh_symbol = " "
+ssh_only = true
+format = "[@$hostname]($style) "
+style = "#d7af87"
 
-[java]
-symbol = " "
+# -----------------------------------------------------------------------------
+# LINE 1: Current Directory (dir)
+# Uses color 31 / 39, truncates long paths like p10k
+# -----------------------------------------------------------------------------
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+truncation_symbol = "…/"
+format = "[$path]($style)[$read_only]($read_only_style) "
+style = "bold #0087af"               # ANSI 31
+read_only = " 🔒"
+read_only_style = "#ff0000"
 
-[julia]
-symbol = " "
+# -----------------------------------------------------------------------------
+# LINE 1: VCS / Git Status
+# Formatted to mirror p10k gitstatus: clean=76, modified=178, untracked=39
+# -----------------------------------------------------------------------------
+[git_branch]
+format = "on [$branch]($style) "
+style = "bold #5fd700"               # ANSI 76 green
+truncation_length = 32
+truncation_symbol = "…"
 
-[kotlin]
-symbol = " "
+[git_commit]
+commit_hash_length = 8
+format = "at [@$hash]($style) "
+style = "#5fd700"
+only_detached = true
 
-[kubernetes]
-symbol = "󱃾 "
+[git_state]
+format = '[\($state( $progress_current/$progress_total)\)]($style) '
+style = "bold #ff0000"
 
-[lua]
-symbol = " "
+[git_status]
+style = "bold #d7af00"               # ANSI 178 yellow
+format = '([$all_status$ahead_behind]($style) )'
+conflicted = "[~$count](#ff0000) "   # ANSI 196 red
+ahead = "⇡$count"
+behind = "⇣$count"
+diverged = "⇡$ahead_count⇣$behind_count"
+untracked = "[?$count](#00afff) "    # ANSI 39 blue
+modified = "!$count"
+staged = "+$count"
+stashed = "*$count"
 
-[maven]
-symbol = " "
+# -----------------------------------------------------------------------------
+# RIGHT PROMPT: Status (exit code / signal)
+# -----------------------------------------------------------------------------
+[status]
+disabled = false
+format = "[$symbol$status]($style) "
+symbol = "✘ "
+style = "#d70000"                    # ANSI 160
+pipestatus = true
+pipestatus_format = "[$pipestatus]($style) "
 
-[memory_usage]
-symbol = "󰍛 "
+# -----------------------------------------------------------------------------
+# RIGHT PROMPT: Execution Time (command_execution_time)
+# Shows when command took >= 3 seconds, formatted as 'took Xs'
+# -----------------------------------------------------------------------------
+[cmd_duration]
+min_time = 3_000
+format = "took [$duration]($style) "
+style = "#8a8a8a"                    # ANSI 101
 
-[meson]
-symbol = "󰔷 "
+# -----------------------------------------------------------------------------
+# RIGHT PROMPT: Background Jobs
+# -----------------------------------------------------------------------------
+[jobs]
+symbol = "✦"
+format = "[$symbol]($style) "
+style = "#5faf00"                    # ANSI 70
 
-[mojo]
-symbol = "󰈸 "
+# -----------------------------------------------------------------------------
+# RIGHT PROMPT: Languages & Environments (asdf / venv / nvm equivalents)
+# -----------------------------------------------------------------------------
+[python]
+format = '[$virtualenv]($style) '
+style = "#00afaf"                    # ANSI 37
+# Don't show python version unless in a virtualenv or python project
+detect_extensions = []
+detect_files = ['.python-version', 'Pipfile', 'pyproject.toml', 'requirements.txt']
 
-[nats]
-symbol = " "
-
-[netns]
-symbol = "󰛳 "
-
-[nim]
-symbol = " "
-
-[nix_shell]
-symbol = " "
+[conda]
+format = '[$environment]($style) '
+style = "#00afaf"                    # ANSI 37
 
 [nodejs]
-symbol = " "
-
-[ocaml]
-symbol = " "
-
-[odin]
-symbol = "󰟢 "
-
-[opa]
-symbol = " "
-
-[openstack]
-symbol = " "
-
-[os.symbols]
-AIX = " "
-AlmaLinux = " "
-Alpaquita = " "
-Alpine = " "
-ALTLinux = " "
-Amazon = " "
-Android = " "
-AOSC = " "
-Arch = " "
-Artix = " "
-Bluefin = " "
-CachyOS = " "
-CentOS = " "
-Debian = " "
-DragonFly = " "
-Elementary = " "
-Emscripten = " "
-EndeavourOS = " "
-Fedora = " "
-FreeBSD = " "
-Garuda = " "
-Gentoo = " "
-HardenedBSD = "󰞌 "
-Illumos = " "
-InstantOS = " "
-Ios = "󰀷 "
-Kali = " "
-Linux = " "
-Mabox = " "
-Macos = " "
-Manjaro = " "
-Mariner = " "
-MidnightBSD = " "
-Mint = " "
-NetBSD = " "
-NixOS = " "
-Nobara = " "
-OpenBSD = " "
-OpenCloudOS = " "
-openEuler = " "
-openSUSE = " "
-OracleLinux = "󰺡 "
-PikaOS = " "
-Pop = " "
-Raspbian = " "
-Redhat = "󱄛 "
-RedHatEnterprise = "󱄛 "
-Redox = "󰀘 "
-RockyLinux = " "
-Solus = " "
-SUSE = " "
-Ubuntu = " "
-Ultramarine = " "
-Unknown = " "
-Uos = " "
-Void = " "
-Windows = "󰍲 "
-Zorin = " "
-
-[package]
-symbol = "󰏗 "
-
-[perl]
-symbol = " "
-
-[php]
-symbol = " "
-
-[pijul_channel]
-symbol = " "
-
-[pixi]
-symbol = "󰏗 "
-
-[pulumi]
-symbol = " "
-
-[purescript]
-symbol = " "
-
-[python]
-symbol = " "
-
-[raku]
-symbol = "󱖊 "
-
-[red]
-symbol = "󱍼 "
-
-[rlang]
-symbol = "󰟔 "
-
-[ruby]
-symbol = " "
+format = 'via [v$version]($style) '
+style = "#5faf00"                    # ANSI 70
+detect_files = ['package.json', '.node-version']
 
 [rust]
-symbol = "󱘗 "
+format = 'via [v$version]($style) '
+style = "#00afaf"                    # ANSI 37
 
-[scala]
-symbol = " "
+[golang]
+format = 'via [v$version]($style) '
+style = "#00afaf"                    # ANSI 37
 
-[shlvl]
-symbol = "󰹍 "
+[java]
+format = 'via [v$version]($style) '
+style = "#0087d7"                    # ANSI 32
 
-[singularity]
-symbol = " "
+[lua]
+format = 'via [v$version]($style) '
+style = "#0087d7"                    # ANSI 32
 
-[solidity]
-symbol = " "
+[php]
+format = 'via [v$version]($style) '
+style = "#875faf"                    # ANSI 99
 
-[spack]
-symbol = " "
-
-[status]
-symbol = " "
-
-[sudo]
-symbol = " "
-
-[swift]
-symbol = " "
+[ruby]
+format = 'via [v$version]($style) '
+style = "#d75f87"                    # ANSI 168
 
 [terraform]
-symbol = " "
+format = 'via [$workspace]($style) '
+style = "#00afaf"                    # ANSI 38
 
-[vlang]
-symbol = " "
-
-[typst]
-symbol = " "
-
-[vagrant]
-symbol = " "
-
-[xmake]
-symbol = " "
-
-[zig]
-symbol = " "
+# -----------------------------------------------------------------------------
+# RIGHT PROMPT: 24h Time (time)
+# Formatted as 'at HH:MM:SS' in grey (ANSI 66)
+# -----------------------------------------------------------------------------
+[time]
+disabled = false
+format = "at [$time]($style)"
+style = "#5f8787"                    # ANSI 66
+time_format = "%T"                   # 24-hour HH:MM:SS
