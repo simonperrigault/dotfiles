@@ -52,6 +52,7 @@ eval "$(zoxide init bash)"
 eval "$(starship init bash)"
 
 if [[ ${BLE_VERSION-} ]]; then
+  ble-bind -f 'M-j' accept-line
   ble-import -d integration/fzf-completion
   ble-import -d integration/fzf-key-bindings
   ble-attach
