@@ -19,4 +19,28 @@ return {
         { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
     },
   },
+  {
+    "zbirenbaum/copilot.lua",
+    opts = {
+      suggestion = {
+        -- On active les suggestions car vous voulez utiliser Alt+W
+        enabled = true,
+        auto_trigger = true,
+        -- On s'assure que Alt+W est lié à l'acceptation par mot
+        keymap = {
+          accept = false, -- On laisse la touche Entrée être gérée par blink.cmp
+          accept_word = "<M-w>", -- Alt+W pour un mot
+          accept_line = false,
+          next = "<M-]>",
+          prev = "<M-[>",
+          dismiss = "<C-c>",
+        },
+      },
+    },
+  },
+  {
+    -- disable tabline
+    "akinsho/bufferline.nvim",
+    enabled = false,
+  },
 }

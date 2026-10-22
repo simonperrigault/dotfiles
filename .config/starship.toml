@@ -1,0 +1,185 @@
+# Starship configuration replicating p10k-lean style
+
+# Empty line before each prompt (matches POWERLEVEL9K_PROMPT_ADD_NEWLINE=true)
+add_newline = true
+
+# Left-side layout
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$line_break\
+$character"""
+
+# Right-side layout (matches p10k right prompt elements)
+right_format = """
+$status\
+$cmd_duration\
+$jobs\
+$python\
+$conda\
+$nodejs\
+$rust\
+$golang\
+$java\
+$lua\
+$php\
+$ruby\
+$terraform\
+$time"""
+
+# -----------------------------------------------------------------------------
+# LINE 2: Prompt Character (prompt_char)
+# -----------------------------------------------------------------------------
+[character]
+success_symbol = "[❯](bold #5fd700)"  # ANSI 76 green
+error_symbol = "[❯](bold #ff0000)"    # ANSI 196 red
+
+# -----------------------------------------------------------------------------
+# LINE 1: Context (User & Host)
+# Hidden by default; only shows when logged in via SSH or as root
+# -----------------------------------------------------------------------------
+[username]
+show_always = false
+format = "[$user]($style)"
+style_user = "#d7af87"               # ANSI 180
+style_root = "bold #d7af00"          # ANSI 178
+
+[hostname]
+ssh_only = true
+format = "[@$hostname]($style) "
+style = "#d7af87"
+
+# -----------------------------------------------------------------------------
+# LINE 1: Current Directory (dir)
+# Uses color 31 / 39, truncates long paths like p10k
+# -----------------------------------------------------------------------------
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+truncation_symbol = "…/"
+format = "[$path]($style)[$read_only]($read_only_style) "
+style = "bold #0087af"               # ANSI 31
+read_only = " 🔒"
+read_only_style = "#ff0000"
+
+# -----------------------------------------------------------------------------
+# LINE 1: VCS / Git Status
+# Formatted to mirror p10k gitstatus: clean=76, modified=178, untracked=39
+# -----------------------------------------------------------------------------
+[git_branch]
+format = "on [$branch]($style) "
+style = "bold #5fd700"               # ANSI 76 green
+truncation_length = 32
+truncation_symbol = "…"
+
+[git_commit]
+commit_hash_length = 8
+format = "at [@$hash]($style) "
+style = "#5fd700"
+only_detached = true
+
+[git_state]
+format = '[\($state( $progress_current/$progress_total)\)]($style) '
+style = "bold #ff0000"
+
+[git_status]
+style = "bold #d7af00"               # ANSI 178 yellow
+format = '([$all_status$ahead_behind]($style) )'
+conflicted = "[~$count](#ff0000) "   # ANSI 196 red
+ahead = "⇡$count"
+behind = "⇣$count"
+diverged = "⇡$ahead_count⇣$behind_count"
+untracked = "[?$count](#00afff) "    # ANSI 39 blue
+modified = "!$count"
+staged = "+$count"
+stashed = "*$count"
+
+# -----------------------------------------------------------------------------
+# RIGHT PROMPT: Status (exit code / signal)
+# -----------------------------------------------------------------------------
+[status]
+disabled = false
+format = "[$symbol$status]($style) "
+symbol = "✘ "
+style = "#d70000"                    # ANSI 160
+pipestatus = true
+pipestatus_format = "[$pipestatus]($style) "
+
+# -----------------------------------------------------------------------------
+# RIGHT PROMPT: Execution Time (command_execution_time)
+# Shows when command took >= 3 seconds, formatted as 'took Xs'
+# -----------------------------------------------------------------------------
+[cmd_duration]
+min_time = 3_000
+format = "took [$duration]($style) "
+style = "#8a8a8a"                    # ANSI 101
+
+# -----------------------------------------------------------------------------
+# RIGHT PROMPT: Background Jobs
+# -----------------------------------------------------------------------------
+[jobs]
+symbol = "✦"
+format = "[$symbol]($style) "
+style = "#5faf00"                    # ANSI 70
+
+# -----------------------------------------------------------------------------
+# RIGHT PROMPT: Languages & Environments (asdf / venv / nvm equivalents)
+# -----------------------------------------------------------------------------
+[python]
+format = '[$virtualenv]($style) '
+style = "#00afaf"                    # ANSI 37
+# Don't show python version unless in a virtualenv or python project
+detect_extensions = []
+detect_files = ['.python-version', 'Pipfile', 'pyproject.toml', 'requirements.txt']
+
+[conda]
+format = '[$environment]($style) '
+style = "#00afaf"                    # ANSI 37
+
+[nodejs]
+format = 'via [v$version]($style) '
+style = "#5faf00"                    # ANSI 70
+detect_files = ['package.json', '.node-version']
+
+[rust]
+format = 'via [v$version]($style) '
+style = "#00afaf"                    # ANSI 37
+
+[golang]
+format = 'via [v$version]($style) '
+style = "#00afaf"                    # ANSI 37
+
+[java]
+format = 'via [v$version]($style) '
+style = "#0087d7"                    # ANSI 32
+
+[lua]
+format = 'via [v$version]($style) '
+style = "#0087d7"                    # ANSI 32
+
+[php]
+format = 'via [v$version]($style) '
+style = "#875faf"                    # ANSI 99
+
+[ruby]
+format = 'via [v$version]($style) '
+style = "#d75f87"                    # ANSI 168
+
+[terraform]
+format = 'via [$workspace]($style) '
+style = "#00afaf"                    # ANSI 38
+
+# -----------------------------------------------------------------------------
+# RIGHT PROMPT: 24h Time (time)
+# Formatted as 'at HH:MM:SS' in grey (ANSI 66)
+# -----------------------------------------------------------------------------
+[time]
+disabled = false
+format = "at [$time]($style)"
+style = "#5f8787"                    # ANSI 66
+time_format = "%T"                   # 24-hour HH:MM:SS
